@@ -1,29 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2017", "2017\2017.csproj", "{94FC811E-42B6-4640-A8E7-ADE02CBF8F34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2017", "2017\2017.csproj", "{94FC811E-42B6-4640-A8E7-ADE02CBF8F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2018", "2018\2018.csproj", "{E0302629-6F56-4438-B734-2593EC83BB7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2018", "2018\2018.csproj", "{E0302629-6F56-4438-B734-2593EC83BB7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2019", "2019\2019.csproj", "{A645854B-B8AA-4E42-A598-FC26416FE7B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2019", "2019\2019.csproj", "{A645854B-B8AA-4E42-A598-FC26416FE7B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2020", "2020\2020.csproj", "{8C81A588-259C-4BE4-BF3C-66B78C3F7E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2020", "2020\2020.csproj", "{8C81A588-259C-4BE4-BF3C-66B78C3F7E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2021", "2021\2021.csproj", "{62FD26BA-C48D-4FCC-8543-A3708BA7C597}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2021", "2021\2021.csproj", "{62FD26BA-C48D-4FCC-8543-A3708BA7C597}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2016", "2016\2016.csproj", "{97D6EA4F-5A8F-4D90-95E1-AFFD7577E991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2016", "2016\2016.csproj", "{97D6EA4F-5A8F-4D90-95E1-AFFD7577E991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2015", "2015\2015.csproj", "{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2015", "2015\2015.csproj", "{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{1D37C2F1-23F3-423D-90A3-F610A1049707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{94FC811E-42B6-4640-A8E7-ADE02CBF8F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +53,15 @@ Global
 		{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57C7B404-BE19-4DB9-9138-D60BC3DEB30D}
 	EndGlobalSection
 EndGlobal
