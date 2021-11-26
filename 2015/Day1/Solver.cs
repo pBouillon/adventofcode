@@ -2,6 +2,7 @@ using Commons;
 
 using System;
 using System.IO;
+using System.Linq;
 
 using Xunit;
 
@@ -51,6 +52,6 @@ public class Solver : ISolver<string, int>
     public string ReadInput(string inputPath)
     {
         var fullPath = Path.Join(AppDomain.CurrentDomain.BaseDirectory, inputPath);
-        return new StreamReader(fullPath).ReadLine() ?? String.Empty;
+        return File.ReadLines(fullPath).FirstOrDefault() ?? String.Empty;
     }
 }
