@@ -1,47 +1,42 @@
 ﻿using Xunit;
 
-namespace _2015.Day1;
+namespace _2015.Day3;
 
 public class SolverTests
 {
     [Theory]
-    [InlineData("()()", 0)]
-    [InlineData("(())", 0)]
-    [InlineData("(((", 3)]
-    [InlineData("(()(()(", 3)]
-    [InlineData("())", -1)]
-    [InlineData("))(", -1)]
-    [InlineData(")))", -3)]
-    [InlineData(")())())", -3)]
-    public void PartOneExamples(string floors, int expected)
+    [InlineData(">", 2)]
+    [InlineData("^>v<", 4)]
+    [InlineData("^v^v^v^v^v", 2)]
+    public void PartOneExamples(string moves, int expected)
     {
         var solver = new Solver();
-        Assert.Equal(expected, solver.PartOne(floors));
+        Assert.Equal(expected, solver.PartOne(moves));
     }
 
     [Fact]
     private void PartOneSolution()
     {
         var solver = new Solver();
-        var floors = solver.ReadInput(solver.InputPath);
-        Assert.Equal(138, solver.PartOne(floors));
+        var moves = solver.ReadInput(solver.InputPath);
+        Assert.Equal(2565, solver.PartOne(moves));
     }
 
     [Theory]
-    [InlineData(")", 1)]
-    [InlineData("()())", 5)]
-    public void PartTwoExamples(string floors, int expected)
+    [InlineData(">v", 3)]
+    [InlineData("^>v<", 3)]
+    [InlineData("^v^v^v^v^v", 11)]
+    public void PartTwoExamples(string moves, int expected)
     {
         var solver = new Solver();
-        Assert.Equal(expected, solver.PartTwo(floors));
+        Assert.Equal(expected, solver.PartTwo(moves));
     }
 
     [Fact]
     private void PartTwoSolution()
     {
         var solver = new Solver();
-        var floors = solver.ReadInput(solver.InputPath);
-        Assert.Equal(1771, solver.PartTwo(floors));
+        var moves = solver.ReadInput(solver.InputPath);
+        Assert.Equal(2639, solver.PartTwo(moves));
     }
 }
-
