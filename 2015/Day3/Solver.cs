@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
@@ -13,7 +12,7 @@ public record Coordinate(int X, int Y);
 public class Solver : ISolver<string, int>
 {
     public string InputPath
-        => "Day3/input.txt";
+        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day3/input.txt");
 
     private HashSet<Coordinate> GetVisitedHouses(string input)
     {
@@ -57,8 +56,5 @@ public class Solver : ISolver<string, int>
     }
 
     public string ReadInput(string inputPath)
-    {
-        var fullPath = Path.Join(AppDomain.CurrentDomain.BaseDirectory, inputPath);
-        return File.ReadLines(fullPath).FirstOrDefault() ?? String.Empty;
-    }
+        => File.ReadLines(inputPath).FirstOrDefault() ?? String.Empty;
 }

@@ -11,7 +11,7 @@ namespace _2015.Day1;
 public class Solver : ISolver<string, int>
 {
     public string InputPath
-        => "Day1/input.txt";
+        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day1/input.txt");
 
     public int PartOne(string input)
         => PartOneRecursive(input, 0);
@@ -50,8 +50,5 @@ public class Solver : ISolver<string, int>
     }
 
     public string ReadInput(string inputPath)
-    {
-        var fullPath = Path.Join(AppDomain.CurrentDomain.BaseDirectory, inputPath);
-        return File.ReadLines(fullPath).FirstOrDefault() ?? String.Empty;
-    }
+        => File.ReadLines(inputPath).FirstOrDefault() ?? String.Empty;
 }

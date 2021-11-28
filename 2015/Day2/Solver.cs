@@ -37,8 +37,8 @@ public record Dimension(int Length, int Width, int Height)
 
 public class Solver : ISolver<IEnumerable<Dimension>, int>
 {
-    public string InputPath 
-        => "Day2/input.txt";
+    public string InputPath
+        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day2/input.txt");
 
     public int PartOne(IEnumerable<Dimension> input)
         => input.Sum(dimension => dimension.Volume + dimension.ComputeSmallestArea());
@@ -47,12 +47,9 @@ public class Solver : ISolver<IEnumerable<Dimension>, int>
         => input.Sum(dimension => dimension.CubicFeetVolume + dimension.ComputeSmallestPerimiter());
 
     public IEnumerable<Dimension> ReadInput(string inputPath)
-    {
-        var fullPath = Path.Join(AppDomain.CurrentDomain.BaseDirectory, inputPath);
-        
-        return File
-            .ReadLines(fullPath)
-            .Select(line => {
+        => File.ReadLines(inputPath)
+            .Select(line =>
+            {
                 var splitted = line
                     .Split('x')
                     .Select(value => int.Parse(value))
@@ -60,5 +57,4 @@ public class Solver : ISolver<IEnumerable<Dimension>, int>
 
                 return new Dimension(splitted[0], splitted[1], splitted[2]);
             });
-    }
 }
