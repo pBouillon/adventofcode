@@ -8,9 +8,10 @@ namespace _2021.Day2;
 
 public record Command(string Name, int Magnitude);
 
-public record Coordinate(int X, int Y);
-
-public record AimCoordinate(int X, int Y, int Aim);
+public record Coordinate(int X, int Y, int Aim = 0)
+{
+    public int Depth => Y * -1;
+}
 
 public class Solver : ISolver<IEnumerable<Command>, int>
 {
@@ -19,30 +20,23 @@ public class Solver : ISolver<IEnumerable<Command>, int>
 
     public int PartOne(IEnumerable<Command> input)
     {
-        var position = new Coordinate(0, 0);
-
-        foreach (var command in input)
-        {
-            position = command switch
+        var position = input.Aggregate(
+            new Coordinate(0, 0),
+            (position, command) => command switch
             {
                 { Name: "forward" } => position with { X = position.X + command.Magnitude },
                 { Name: "down" } => position with { Y = position.Y - command.Magnitude },
                 { Name: "up" } => position with { Y = position.Y + command.Magnitude },
                 _ => throw new System.Exception("Unknown command"),
-            };
-        }
-
-        var depth = position.Y * -1;
-        return position.X * depth;
+            });
+        return position.X * position.Depth;
     }
 
     public int PartTwo(IEnumerable<Command> input)
     {
-        var position = new AimCoordinate(0, 0, 0);
-
-        foreach (var command in input)
-        {
-            position = command switch
+        var position = input.Aggregate(
+            new Coordinate(0, 0),
+            (position, command) => command switch
             {
                 { Name: "forward" } => position with
                 {
@@ -52,11 +46,9 @@ public class Solver : ISolver<IEnumerable<Command>, int>
                 { Name: "down" } => position with { Aim = position.Aim - command.Magnitude },
                 { Name: "up" } => position with { Aim = position.Aim + command.Magnitude },
                 _ => throw new System.Exception("Unknown command"),
-            };
-        }
+            });
 
-        var depth = position.Y * -1;
-        return position.X * depth;
+        return position.X * position.Depth;
     }
 
     public IEnumerable<Command> ReadInput(string inputPath)
