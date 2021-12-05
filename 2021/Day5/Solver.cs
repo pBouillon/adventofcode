@@ -31,25 +31,17 @@ public class Solver : ISolver<IEnumerable<Range>, int>
     public int PartOne(IEnumerable<Range> input)
     {
         var straightRanges = input.Where(range => range.Begin.X == range.End.X || range.Begin.Y == range.End.Y);
-
-        var grid = new Dictionary<Coordinate, int>();
-
-        foreach (var range in straightRanges)
-        {
-            foreach (var point in range.GetPointsInRange())
-            {
-                grid[point] = grid.GetValueOrDefault(point, 0) + 1;
-            }
-        }
-
-        return grid.Count(entry => entry.Value > 1);
+        return CountIntersections(straightRanges);
     }
 
     public int PartTwo(IEnumerable<Range> input)
+        => CountIntersections(input);
+
+    public int CountIntersections(IEnumerable<Range> ranges)
     {
         var grid = new Dictionary<Coordinate, int>();
 
-        foreach (var range in input)
+        foreach (var range in ranges)
         {
             foreach (var point in range.GetPointsInRange())
             {
