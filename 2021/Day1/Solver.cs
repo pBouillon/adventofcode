@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace _2021.Day5;
+namespace _2021.Day1;
 
 public class Solver : ISolver<int[], int>
 {
