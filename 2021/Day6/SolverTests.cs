@@ -11,14 +11,13 @@ public class SolverTests
     {
         var solver = new Solver();
 
-        var initialPopulation = new LanternFishPopulation(new List<LanternFish>
+        var initialPopulation = new Dictionary<int, long>
         {
-            new LanternFish(3),
-            new LanternFish(4),
-            new LanternFish(3),
-            new LanternFish(1),
-            new LanternFish(2),
-        });
+            { 1, 1 },
+            { 2, 1 },
+            { 3, 2 },
+            { 4, 1 }
+        };
 
         Assert.Equal(5934, solver.PartOne(initialPopulation));
     }
@@ -28,7 +27,31 @@ public class SolverTests
     {
         var solver = new Solver();
         var initialPopulation = solver.ReadInput(solver.InputPath);
-        Assert.Equal(6311, solver.PartOne(initialPopulation));
+        Assert.Equal(352872, solver.PartOne(initialPopulation));
+    }
+
+    [Fact]
+    public void PartTwoExample()
+    {
+        var solver = new Solver();
+
+        var initialPopulation = new Dictionary<int, long>
+        {
+            { 1, 1 },
+            { 2, 1 },
+            { 3, 2 },
+            { 4, 1 }
+        };
+
+        Assert.Equal(26984457539, solver.PartTwo(initialPopulation));
+    }
+
+    [Fact]
+    public void PartTwo()
+    {
+        var solver = new Solver();
+        var initialPopulation = solver.ReadInput(solver.InputPath);
+        Assert.Equal(1604361182149, solver.PartTwo(initialPopulation));
     }
 }
 

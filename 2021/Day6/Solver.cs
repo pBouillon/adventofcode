@@ -6,66 +6,52 @@ using System.Linq;
 
 namespace _2021.Day6;
 
-public class LanternFish
-{
-    public int InternalTimer { get; private set; }
-
-    public LanternFish(int internalTimer)
-        => InternalTimer = internalTimer;
-
-    public void PassDay()
-        => InternalTimer = InternalTimer == 0
-            ? InternalTimer = 6
-            : --InternalTimer;
-}
-
-public class LanternFishPopulation
-{
-    public List<LanternFish> Population { get; private set; } = new List<LanternFish>();
-
-    public LanternFishPopulation(List<LanternFish> initialPopulation)
-        => Population = initialPopulation;
-
-    public void PassDay()
-    {
-        for (var i = 0; i < Population.Count(fish => fish.InternalTimer == 0); ++i)
-        {
-            Population.Add(new LanternFish(8));
-        }
-
-        Population.ForEach(fish => fish.PassDay());
-    }
-}
-
-public class Solver : ISolver<LanternFishPopulation, int>
+public class Solver : ISolver<IDictionary<int, long>, long>
 {
     public string InputPath
         => "Day6/input.txt";
 
-    public int PartOne(LanternFishPopulation lanternFishesPopulation)
+    private IDictionary<int, long> GetNextGeneration(IDictionary<int, long> current)
     {
-        for (int i = 0; i < 80; ++i)
+        var next = current.ToDictionary(
+                entry => entry.Key - 1,
+                entry => entry.Value);
+
+        if (!next.ContainsKey(-1)) return next;
+
+        next[6] = next.GetValueOrDefault(6, 0) + next[-1];
+        next[8] = next.GetValueOrDefault(8, 0) + next[-1];
+        next.Remove(-1);
+
+        return next;
+    }
+
+    public long PartOne(IDictionary<int, long> currentPopulation)
+    {
+        for (var i = 0; i < 80; ++i)
         {
-            lanternFishesPopulation.PassDay();
+            currentPopulation = GetNextGeneration(currentPopulation);
         }
 
-        return lanternFishesPopulation.Population.Count;
+        return currentPopulation.Values.Sum();
     }
 
-    public int PartTwo(LanternFishPopulation input)
+    public long PartTwo(IDictionary<int, long> currentPopulation)
     {
-        throw new System.NotImplementedException();
+        for (var i = 0; i < 256; ++i)
+        {
+            currentPopulation = GetNextGeneration(currentPopulation);
+        }
+
+        return currentPopulation.Values.Sum();
     }
 
-    public LanternFishPopulation ReadInput(string inputPath)
-    {
-        var lanternFishes = File
+    public IDictionary<int, long> ReadInput(string inputPath)
+        => File
             .ReadLines(inputPath)
             .First()
             .Split(",")
-            .Select(internalTimer => new LanternFish(int.Parse(internalTimer)))
-            .ToList();
-
-        return new LanternFishPopulation(lanternFishes);
-    }
+            .Select(internalTimer => int.Parse(internalTimer))
+            .GroupBy(internalTimer => internalTimer)
+            .ToDictionary(value => value.Key, value => (long) value.Count());
 }
