@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace _2021.Day6;
 
-public class Solver : ISolver<IDictionary<int, long>, long>
+public class Solver : ISolver<Dictionary<int, long>, long>
 {
     public string InputPath
         => "Day6/input.txt";
 
-    private IDictionary<int, long> GetNextGeneration(IDictionary<int, long> current)
+    private Dictionary<int, long> GetNextGeneration(Dictionary<int, long> current)
     {
         var next = current.ToDictionary(
                 entry => entry.Key - 1,
@@ -26,27 +26,21 @@ public class Solver : ISolver<IDictionary<int, long>, long>
         return next;
     }
 
-    public long PartOne(IDictionary<int, long> currentPopulation)
-    {
-        for (var i = 0; i < 80; ++i)
-        {
-            currentPopulation = GetNextGeneration(currentPopulation);
-        }
+    private long GetPopulationAfterSomeTime(Dictionary<int, long> initial, int elapsedDays)
+        => Enumerable.Range(0, elapsedDays)
+            .Aggregate(
+                initial,
+                (current, _) => GetNextGeneration(current))
+            .Values
+            .Sum();
 
-        return currentPopulation.Values.Sum();
-    }
+    public long PartOne(Dictionary<int, long> currentPopulation)
+        => GetPopulationAfterSomeTime(currentPopulation, 80);
 
-    public long PartTwo(IDictionary<int, long> currentPopulation)
-    {
-        for (var i = 0; i < 256; ++i)
-        {
-            currentPopulation = GetNextGeneration(currentPopulation);
-        }
+    public long PartTwo(Dictionary<int, long> currentPopulation)
+        => GetPopulationAfterSomeTime(currentPopulation, 256);
 
-        return currentPopulation.Values.Sum();
-    }
-
-    public IDictionary<int, long> ReadInput(string inputPath)
+    public Dictionary<int, long> ReadInput(string inputPath)
         => File
             .ReadLines(inputPath)
             .First()

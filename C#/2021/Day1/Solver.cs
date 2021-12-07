@@ -1,6 +1,5 @@
 ﻿using Commons;
 
-using System;
 using System.IO;
 using System.Linq;
 
@@ -8,9 +7,8 @@ namespace _2021.Day1;
 
 public class Solver : ISolver<int[], int>
 {
-
     public string InputPath
-        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day1/input.txt");
+        => "Day1/input.txt";
 
     public int PartOne(int[] measures)
     {

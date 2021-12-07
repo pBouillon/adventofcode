@@ -4,7 +4,7 @@ using TestCommons;
 
 namespace _2021.Day6;
 
-public class PuzzleTest : SolverTest<Solver, IDictionary<int, long>, long>
+public class PuzzleTest : SolverTest<Solver, Dictionary<int, long>, long>
 {
     private readonly Dictionary<int, long> Fishes = new()
     {
