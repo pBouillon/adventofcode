@@ -10,4 +10,4 @@
 | [2018](https://adventofcode.com/2018) | [C#](./C%23/2018) |  **2⭐** |
 | [2017](https://adventofcode.com/2017) | [C#](./C%23/2017) | **11⭐** |
 | [2016](https://adventofcode.com/2016) | [C#](./C%23/2016) |  **_⭐** |
-| [2015](https://adventofcode.com/2015) | [C#](./C%23/2015) |  **9⭐** |
+| [2015](https://adventofcode.com/2015) | [C#](./C%23/2015) | **10⭐** |
