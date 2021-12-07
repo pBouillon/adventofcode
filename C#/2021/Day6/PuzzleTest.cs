@@ -20,10 +20,14 @@ public class PuzzleTest : SolverTest<Solver, Dictionary<int, long>, long>
         Result = 5934,
     };
 
+    protected override long PartOneSolution => 352872;
+
     protected override Example PartTwo => new()
     {
         Input = Fishes,
         Result = 26984457539,
     };
+
+    protected override long PartTwoSolution => 1604361182149;
 }
 

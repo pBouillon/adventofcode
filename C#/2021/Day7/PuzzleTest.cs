@@ -14,10 +14,13 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<int>, int>
         Result = 37,
     };
 
+    protected override int PartOneSolution => 347509;
+
     protected override Example PartTwo => new()
     {
         Input = CrabPositions,
         Result = 168,
     };
-}
 
+    protected override int PartTwoSolution => 98257206;
+}

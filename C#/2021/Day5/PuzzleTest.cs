@@ -26,9 +26,13 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<Range>, int>
         Result = 5,
     };
 
+    protected override int PartOneSolution => 6311;
+
     protected override Example PartTwo => new()
     {
         Input = Ranges,
         Result = 12,
     };
+
+    protected override int PartTwoSolution => 19929;
 }

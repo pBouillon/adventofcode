@@ -48,9 +48,13 @@ public class PuzzleTest : SolverTest<Solver, (IEnumerable<int>, BingoGrid[]), in
         Result = 4512,
     };
 
+    protected override int PartOneSolution => 63552;
+
     protected override Example PartTwo => new()
     {
         Input = (Drawn, Grids),
         Result = 1924,
     };
+
+    protected override int PartTwoSolution => 9020;
 }

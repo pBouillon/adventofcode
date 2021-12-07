@@ -22,9 +22,13 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<Command>, int>
         Result = 150,
     };
 
+    protected override int PartOneSolution => 1728414;
+
     protected override Example PartTwo => new()
     {
         Input = Commands,
         Result = 900,
     };
+
+    protected override int PartTwoSolution => 1765720035;
 }

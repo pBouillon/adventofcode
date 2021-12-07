@@ -26,9 +26,13 @@ public class PuzzleTest : SolverTest<Solver, string[], int>
         Result = 198,
     };
 
+    protected override int PartOneSolution => 2003336;
+
     protected override Example PartTwo => new()
     {
         Input = Measures,
         Result = 230,
     };
+
+    protected override int PartTwoSolution => 1877139;
 }
