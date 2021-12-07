@@ -1,7 +1,7 @@
 ﻿using Commons;
 
-using System.IO;
 using System;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,10 +10,10 @@ namespace _2015.Day4;
 
 public class Solver : ISolver<string, int>
 {
-    private HashAlgorithm MD5 = (HashAlgorithm) CryptoConfig.CreateFromName("MD5")!;
+    private readonly HashAlgorithm MD5 = (HashAlgorithm) CryptoConfig.CreateFromName("MD5")!;
 
     public string InputPath
-        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day4/input.txt");
+        => "Day4/input.txt";
 
     // From: https://stackoverflow.com/a/11477466/6152689
     private string GetHash(string input)
@@ -45,5 +45,7 @@ public class Solver : ISolver<string, int>
     }
 
     public string ReadInput(string inputPath)
-        => File.ReadLines(inputPath).FirstOrDefault() ?? String.Empty;
+        => File
+            .ReadLines(inputPath)
+            .First();
 }

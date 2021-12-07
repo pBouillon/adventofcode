@@ -22,7 +22,7 @@ public abstract class SolverTest<TSolver, TInput, TResult>
 
     protected abstract TResult PartTwoSolution { get; }
 
-    [Fact]
+    [Fact(DisplayName = "Part One - Example")]
     public void PartOneExampleTest()
     {
         var solver = new TSolver();
@@ -30,7 +30,7 @@ public abstract class SolverTest<TSolver, TInput, TResult>
         Assert.Equal(PartOne.Result, solver.PartOne(input));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Part One - Solution")]
     public void PartOneSolutionTest()
     {
         var solver = new TSolver();
@@ -38,7 +38,7 @@ public abstract class SolverTest<TSolver, TInput, TResult>
         Assert.Equal(PartOneSolution, solver.PartOne(input));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Part Two - Example")]
     public void PartTwoExampleTest()
     {
         var solver = new TSolver();
@@ -46,7 +46,7 @@ public abstract class SolverTest<TSolver, TInput, TResult>
         Assert.Equal(PartTwo.Result, solver.PartTwo(input));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Part Two - Solution")]
     public void PartTwoSolutionTest()
     {
         var solver = new TSolver();

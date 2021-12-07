@@ -1,6 +1,5 @@
 ﻿using Commons;
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,15 +29,14 @@ public record Dimension(int Length, int Width, int Height)
         var sides = new List<int> { Length, Width, Height };
         sides.Sort();
 
-        return 2 * sides[0]
-            + 2 * sides[1];
+        return 2 * sides[0] + 2 * sides[1];
     }
 }
 
 public class Solver : ISolver<IEnumerable<Dimension>, int>
 {
     public string InputPath
-        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day2/input.txt");
+        => "Day2/input.txt";
 
     public int PartOne(IEnumerable<Dimension> input)
         => input.Sum(dimension => dimension.Volume + dimension.ComputeSmallestArea());

@@ -4,14 +4,12 @@ using System;
 using System.IO;
 using System.Linq;
 
-using Xunit;
-
 namespace _2015.Day1;
 
 public class Solver : ISolver<string, int>
 {
     public string InputPath
-        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day1/input.txt");
+        => "Day1/input.txt";
 
     public int PartOne(string input)
         => PartOneRecursive(input, 0);

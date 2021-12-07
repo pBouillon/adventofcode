@@ -12,7 +12,7 @@ public record Coordinate(int X, int Y);
 public class Solver : ISolver<string, int>
 {
     public string InputPath
-        => Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Day3/input.txt");
+        => "Day3/input.txt";
 
     private HashSet<Coordinate> GetVisitedHouses(string input)
     {
