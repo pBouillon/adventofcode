@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2016", "2016\2016.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2015", "2015\2015.csproj", "{7654E31F-CE6D-47C2-B936-9A0A8C10FF0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{1D37C2F1-23F3-423D-90A3-F610A1049707}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{1D37C2F1-23F3-423D-90A3-F610A1049707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommons", "TestCommons\TestCommons.csproj", "{29B72F7C-14C7-4D3B-9B61-686F455EC7C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D37C2F1-23F3-423D-90A3-F610A1049707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29B72F7C-14C7-4D3B-9B61-686F455EC7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29B72F7C-14C7-4D3B-9B61-686F455EC7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29B72F7C-14C7-4D3B-9B61-686F455EC7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29B72F7C-14C7-4D3B-9B61-686F455EC7C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
