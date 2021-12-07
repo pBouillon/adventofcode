@@ -11,7 +11,7 @@ public record Coordinate(int X, int Y);
 
 public record Range(Coordinate Begin, Coordinate End)
 {
-    public Coordinate Vector => new Coordinate(End.X - Begin.X, End.Y - Begin.Y);
+    public Coordinate Vector => new(End.X - Begin.X, End.Y - Begin.Y);
 
     public IEnumerable<Coordinate> GetPointsInRange()
     {
