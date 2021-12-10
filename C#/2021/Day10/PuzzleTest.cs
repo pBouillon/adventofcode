@@ -4,7 +4,7 @@ using TestCommons;
 
 namespace _2021.Day10;
 
-public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, int>
+public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, long>
 {
     private readonly IEnumerable<string> input = new List<string>
     {
@@ -26,7 +26,7 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, int>
         Result = 26397,
     };
 
-    protected override int PartOneSolution => 243939;
+    protected override long PartOneSolution => 243939;
 
     protected override Example PartTwo => new()
     {
@@ -34,5 +34,5 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, int>
         Result = 288957,
     };
 
-    protected override int PartTwoSolution => 192498059;
+    protected override long PartTwoSolution => 2421222841;
 }

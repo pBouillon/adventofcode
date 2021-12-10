@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace _2021.Day10;
 
-public class Solver : ISolver<IEnumerable<string>, int>
+public class Solver : ISolver<IEnumerable<string>, long>
 {
     public string InputPath => "Day10/input.txt";
 
@@ -69,7 +69,7 @@ public class Solver : ISolver<IEnumerable<string>, int>
         return autocompletion;
     }
 
-    public int PartOne(IEnumerable<string> input)
+    public long PartOne(IEnumerable<string> input)
     {
         return input
             .Select(GetCorruptingChar)
@@ -83,13 +83,13 @@ public class Solver : ISolver<IEnumerable<string>, int>
             });
     }
 
-    public int PartTwo(IEnumerable<string> input)
+    public long PartTwo(IEnumerable<string> input)
     {
         var scores = input
             .Where(line => GetCorruptingChar(line) is null)
             .Select(incomplete => GetAutocompletionFor(incomplete))
             .Select(autocompletion => autocompletion.Aggregate(
-                0,
+                0L,
                 (score, @char) => 5 * score + @char switch
                 {
                     ')' => 1,
