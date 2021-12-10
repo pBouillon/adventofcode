@@ -102,7 +102,7 @@ public class Solver : ISolver<IEnumerable<string>, int>
             .OrderBy(score => score)
             .ToArray();
 
-        return scores[scores.Length / 2 + 1];
+        return scores[scores.Length / 2];
     }
 
     public IEnumerable<string> ReadInput(string inputPath)

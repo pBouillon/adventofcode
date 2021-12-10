@@ -34,5 +34,5 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, int>
         Result = 288957,
     };
 
-    protected override int PartTwoSolution => 0;
+    protected override int PartTwoSolution => 192498059;
 }
