@@ -39,6 +39,36 @@ public class Solver : ISolver<IEnumerable<string>, int>
         return null;
     }
 
+    public IEnumerable<char> GetAutocompletionFor(string line)
+    {
+        var closingSymbols = new Dictionary<char, char>()
+        {
+            ['('] = ')',
+            ['{'] = '}',
+            ['['] = ']',
+            ['<'] = '>',
+        };
+
+        var symbols = new Stack<char>();
+        foreach (var @char in line)
+        {
+            if (closingSymbols.ContainsKey(@char))
+            {
+                symbols.Push(@char);
+                continue;
+            }
+
+            symbols.Pop();
+        }
+
+        var autocompletion = new Queue<char>();
+        foreach (var remaining in symbols)
+        {
+            autocompletion.Enqueue(closingSymbols[remaining]);
+        }
+        return autocompletion;
+    }
+
     public int PartOne(IEnumerable<string> input)
     {
         return input
@@ -55,7 +85,24 @@ public class Solver : ISolver<IEnumerable<string>, int>
 
     public int PartTwo(IEnumerable<string> input)
     {
-        throw new System.NotImplementedException();
+        var scores = input
+            .Where(line => GetCorruptingChar(line) is null)
+            .Select(incomplete => GetAutocompletionFor(incomplete))
+            .Select(autocompletion => autocompletion.Aggregate(
+                0,
+                (score, @char) => 5 * score + @char switch
+                {
+                    ')' => 1,
+                    ']' => 2,
+                    '}' => 3,
+                    '>' => 4,
+                    _ => 0,
+                })
+            )
+            .OrderBy(score => score)
+            .ToArray();
+
+        return scores[scores.Length / 2 + 1];
     }
 
     public IEnumerable<string> ReadInput(string inputPath)
