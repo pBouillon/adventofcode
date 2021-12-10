@@ -10,27 +10,27 @@ public class Solver : ISolver<IEnumerable<string>, long>
 {
     public string InputPath => "Day10/input.txt";
 
+    private readonly IDictionary<char, char> _closingSymbols = new Dictionary<char, char>
+    {
+        ['('] = ')',
+        ['{'] = '}',
+        ['['] = ']',
+        ['<'] = '>',
+    };
+
     private char? GetCorruptingChar(string line)
     {
-        var closingSymbols = new Dictionary<char, char>()
-        {
-            ['('] = ')',
-            ['{'] = '}',
-            ['['] = ']',
-            ['<'] = '>',
-        };
-
         var symbols = new Stack<char>();
         foreach (var @char in line)
         {
-            if (closingSymbols.ContainsKey(@char))
+            if (_closingSymbols.ContainsKey(@char))
             {
                 symbols.Push(@char);
                 continue;
             }
 
-            var expectedClosing = closingSymbols[symbols.Pop()];
-            if (closingSymbols.Values.Contains(@char) && expectedClosing != @char)
+            var expectedClosing = _closingSymbols[symbols.Pop()];
+            if (_closingSymbols.Values.Contains(@char) && expectedClosing != @char)
             {
                 return @char;
             }
@@ -39,20 +39,12 @@ public class Solver : ISolver<IEnumerable<string>, long>
         return null;
     }
 
-    public IEnumerable<char> GetAutocompletionFor(string line)
+    public IEnumerable<char> GetAutocompleteFor(string line)
     {
-        var closingSymbols = new Dictionary<char, char>()
-        {
-            ['('] = ')',
-            ['{'] = '}',
-            ['['] = ']',
-            ['<'] = '>',
-        };
-
         var symbols = new Stack<char>();
         foreach (var @char in line)
         {
-            if (closingSymbols.ContainsKey(@char))
+            if (_closingSymbols.ContainsKey(@char))
             {
                 symbols.Push(@char);
                 continue;
@@ -61,12 +53,12 @@ public class Solver : ISolver<IEnumerable<string>, long>
             symbols.Pop();
         }
 
-        var autocompletion = new Queue<char>();
+        var autocomplete = new Queue<char>();
         foreach (var remaining in symbols)
         {
-            autocompletion.Enqueue(closingSymbols[remaining]);
+            autocomplete.Enqueue(_closingSymbols[remaining]);
         }
-        return autocompletion;
+        return autocomplete;
     }
 
     public long PartOne(IEnumerable<string> input)
@@ -87,8 +79,8 @@ public class Solver : ISolver<IEnumerable<string>, long>
     {
         var scores = input
             .Where(line => GetCorruptingChar(line) is null)
-            .Select(incomplete => GetAutocompletionFor(incomplete))
-            .Select(autocompletion => autocompletion.Aggregate(
+            .Select(GetAutocompleteFor)
+            .Select(autocomplete => autocomplete.Aggregate(
                 0L,
                 (score, @char) => 5 * score + @char switch
                 {

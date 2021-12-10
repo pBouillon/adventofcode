@@ -6,7 +6,7 @@ namespace _2021.Day10;
 
 public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, long>
 {
-    private readonly IEnumerable<string> input = new List<string>
+    private readonly IEnumerable<string> _input = new List<string>
     {
         "[({(<(())[]>[[{[]{<()<>>",
         "[(()[<>])]({[<{<<[]>>(",
@@ -22,7 +22,7 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, long>
 
     protected override Example PartOne => new()
     {
-        Input = input,
+        Input = _input,
         Result = 26397,
     };
 
@@ -30,7 +30,7 @@ public class PuzzleTest : SolverTest<Solver, IEnumerable<string>, long>
 
     protected override Example PartTwo => new()
     {
-        Input = input,
+        Input = _input,
         Result = 288957,
     };
 
