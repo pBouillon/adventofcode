@@ -30,27 +30,20 @@ public class Solver : ISolver<(ISet<Coordinate>, IEnumerable<FoldingInstruction>
     public string InputPath => "Day13/input.txt";
 
     private static ISet<Coordinate> GetPointsAfterFolds(ISet<Coordinate> points, IEnumerable<FoldingInstruction> instructions)
-    {
-        foreach (var (direction, offset) in instructions)
-        {
-            points = direction switch
+        => instructions.Aggregate(
+            points,
+            (current, instruction) => instruction.Direction switch
             {
-                Axis.X => points
-                    .Select(point => point.X > offset
-                        ? point with { X = 2 * offset - point.X }
+                Axis.X => current.Select(point => point.X > instruction.Offset
+                        ? point with { X = 2 * instruction.Offset - point.X }
                         : point)
                     .ToHashSet(),
-                Axis.Y => points
-                    .Select(point => point.Y > offset
-                        ? point with { Y = 2 * offset - point.Y }
+                Axis.Y => current.Select(point => point.Y > instruction.Offset
+                        ? point with { Y = 2 * instruction.Offset - point.Y }
                         : point)
                     .ToHashSet(),
                 _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-        return points;
-    }
+            });
 
     public string PartOne((ISet<Coordinate>, IEnumerable<FoldingInstruction>) input)
     {
