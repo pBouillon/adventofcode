@@ -5,21 +5,49 @@ using TestCommons;
 
 namespace _2021.Day13;
 
-public class PuzzleTest : SolverTest<Solver, (Dictionary<Coordinate, bool>, IEnumerable<FoldingInstruction>), int>
+public class PuzzleTest : SolverTest<Solver, (ISet<Coordinate>, IEnumerable<FoldingInstruction>), string>
 {
-    protected override Example PartOne => new()
+    private readonly ISet<Coordinate> _points = new HashSet<Coordinate>
     {
-        Input = (new Dictionary<Coordinate, bool>(), Array.Empty<FoldingInstruction>()),
-        Result = 17,
+        new(6, 10),
+        new(0, 14),
+        new(9, 10),
+        new(0, 3),
+        new(10, 4),
+        new(4, 11),
+        new(6, 0),
+        new(6, 12),
+        new(4, 1),
+        new(0, 13),
+        new(10, 12),
+        new(3, 4),
+        new(3, 0),
+        new(8, 4),
+        new(1, 10),
+        new(2, 14),
+        new(8, 10),
+        new(9, 0),
     };
 
-    protected override int PartOneSolution => 0;
+    private readonly IEnumerable<FoldingInstruction> _instructions = new List<FoldingInstruction>
+    {
+        new(Axis.Y, 7),
+        new(Axis.X, 5),
+    };
+
+    protected override Example PartOne => new()
+    {
+        Input = (_points, _instructions),
+        Result = "17",
+    };
+
+    protected override string PartOneSolution => "666";
 
     protected override Example PartTwo => new()
     {
-        Input = (new Dictionary<Coordinate, bool>(), Array.Empty<FoldingInstruction>()),
-        Result = 0,
+        Input = (_points, _instructions),
+        Result = string.Empty,
     };
 
-    protected override int PartTwoSolution => 0;
+    protected override string PartTwoSolution => "CJHAZHKU";
 }
