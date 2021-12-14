@@ -3,7 +3,7 @@ using TestCommons;
 
 namespace _2021.Day14;
 
-public class PuzzleTest : SolverTest<Solver, (string, Dictionary<string, string>), int>
+public class PuzzleTest : SolverTest<Solver, (string, Dictionary<string, string>), long>
 {
     private readonly Dictionary<string, string> _insertions = new Dictionary<string, string>
     {
@@ -31,13 +31,13 @@ public class PuzzleTest : SolverTest<Solver, (string, Dictionary<string, string>
         Result = 1588,
     };
 
-    protected override int PartOneSolution => 3048;
+    protected override long PartOneSolution => 3048;
 
     protected override Example PartTwo => new()
     {
         Input = ("NNCB", _insertions),
-        Result = 0,
+        Result = 2188189693529,
     };
 
-    protected override int PartTwoSolution => 0;
+    protected override long PartTwoSolution => 3288891573057;
 }

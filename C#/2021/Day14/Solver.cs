@@ -6,46 +6,88 @@ using System.Linq;
 
 namespace _2021.Day14;
 
-public class Solver : ISolver<(string, Dictionary<string, string>), int>
+public class Solver : ISolver<(string, Dictionary<string, string>), long>
 {
     public string InputPath => "Day14/input.txt";
 
-    public int PartOne((string, Dictionary<string, string>) input)
+    private static Dictionary<string, long> GetPairsCount(string polymer)
+        => Enumerable.Range(0, polymer.Length - 1)
+            .Select(i => polymer.Substring(i, 2))
+            .GroupBy(pair => pair)
+            .ToDictionary(
+                group => group.Key,
+                group => (long) group.Count());
+
+    private static (Dictionary<string, long>, Dictionary<string, long>) GetNextPolymerPairs(
+        Dictionary<string, long> pairs, Dictionary<string, long>  count, IReadOnlyDictionary<string, string> conversions)
     {
-        var (start, conversions) = input;
+        var next = pairs.ToDictionary(
+            entry => entry.Key,
+            entry => entry.Value);
 
-        var result = Enumerable.Range(0, 10)
-            .Aggregate(
-                start,
-                (current, _) => current = ComputePolymer(current, conversions));
-
-        var elementsCount = result.GroupBy(letter => letter);
-
-        var max = elementsCount.Max(element => element.Count());
-        var min = elementsCount.Min(element => element.Count());
-
-        return max - min;
-    }
-
-    private static string ComputePolymer(string current, Dictionary<string, string> conversions)
-    {
-        var result = string.Empty;
-
-        for (var i = 0; i < current.Length - 1; ++i)
+        foreach (var (pair, pairCount) in pairs)
         {
-            var p1 = current[i].ToString();
-            var pair = current[i..(i + 2)];
+            var production = conversions.GetValueOrDefault(pair);
+            if (production is null) continue;
 
-            result += p1 + conversions.GetValueOrDefault(pair, string.Empty);
+            // Increase the count of the produced element by the number of pairs that produce it
+            count[production] = count.GetValueOrDefault(production) + pairCount;
+
+            // Update all all the polymer pairs producing the element: AB -> Ax and xB
+            next[pair] -= pairCount;
+            
+            var (a, x, b) = (pair[0], production, pair[1]);
+
+            next[$"{a}{x}"] = next.GetValueOrDefault($"{a}{x}") + pairCount;
+            next[$"{x}{b}"] = next.GetValueOrDefault($"{x}{b}") + pairCount;
         }
 
-        return result + current[^1];
+        // Remove the empty entries to not iterate on it on the next cycle
+        next = next.Where(entry => entry.Value > 0)
+            .ToDictionary(
+                entry => entry.Key,
+                entry => entry.Value);
+
+        return (next, count);
     }
 
-    public int PartTwo((string, Dictionary<string, string>) input)
+    private static Dictionary<string, long> GetElementsCountAfter(int cycles, string polymer, Dictionary<string, string> conversions)
     {
-        var (start, conversions) = input;
-        return 0;
+        var pairs = GetPairsCount(polymer);
+
+        var count = polymer.ToHashSet()
+            .ToDictionary(
+                element => element.ToString(),
+                element => (long) polymer.Count(@char => @char == element));
+
+        (_, count) = Enumerable.Range(0, cycles)
+            .Aggregate(
+                (pairs, count),
+                (current, _) => GetNextPolymerPairs(current.pairs, current.count, conversions));
+
+        return count;
+    }
+
+    public long PartOne((string, Dictionary<string, string>) input)
+    {
+        var (polymer, conversions) = input;
+        var count = GetElementsCountAfter(10, polymer, conversions);
+
+        var mostCommonCount = count.Max(elementCount => elementCount.Value);
+        var leastCommonCount = count.Min(elementCount => elementCount.Value);
+
+        return mostCommonCount - leastCommonCount;
+    }
+
+    public long PartTwo((string, Dictionary<string, string>) input)
+    {
+        var (polymer, conversions) = input;
+        var count = GetElementsCountAfter(40, polymer, conversions);
+
+        var mostCommonCount = count.Max(elementCount => elementCount.Value);
+        var leastCommonCount = count.Min(elementCount => elementCount.Value);
+
+        return mostCommonCount - leastCommonCount;
     }
 
     public (string, Dictionary<string, string>) ReadInput(string inputPath)
