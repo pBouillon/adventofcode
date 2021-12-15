@@ -3,17 +3,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace _2021.Day15;
 
 public record Coordinate(int X, int Y)
 {
     public IEnumerable<Coordinate> GetNeighbors()
-        => from i in new[] { -1, 0, 1 }
-           from j in new[] { -1, 0, 1 }
-           where i != 0 || j != 0
-           select new Coordinate(X + i, Y + j);
+        => new[]
+        {
+            new Coordinate(X - 1, Y),
+            new Coordinate(X + 1, Y),
+            new Coordinate(X, Y - 1),
+            new Coordinate(X, Y + 1),
+        };
 }
 
 public class Solver : ISolver<int[][], long>
@@ -37,7 +39,6 @@ public class Solver : ISolver<int[][], long>
 
         // Compute the shortest distance between nodes
         var visited = new HashSet<Coordinate>();
-        var predecessor = new Dictionary<Coordinate, Coordinate>();
 
         while (visited.Count != cost.Count)
         {
@@ -50,29 +51,32 @@ public class Solver : ISolver<int[][], long>
 
             current.GetNeighbors()
                 .Where(neighbor => cost.ContainsKey(neighbor)
-                    && cost[neighbor] > cost[current])
+                    && cost[neighbor] > cost[current] + map[neighbor.X][neighbor.Y])
                 .ToList()
-                .ForEach(neighbor =>
-                {
-                    cost[neighbor] = cost[current] + map[current.X][current.Y];
-                    predecessor[neighbor] = current;
-                });
+                .ForEach(neighbor => cost[neighbor] = cost[current] + map[neighbor.X][neighbor.Y]);
         }
 
         // Compute the shortest path
         return cost[target];
     }
 
-    public long PartOne(int[][] input)
+    public long PartOne(int[][] map)
     {
         var start = new Coordinate(0, 0);
-        var goal = new Coordinate(input.Length - 1, input.Length - 1);
+        var goal = new Coordinate(map.Length - 1, map.Length - 1);
 
-        return GetShortestPathCost(input, start, goal);
+        return GetShortestPathCost(map, start, goal);
     }
 
-    public long PartTwo(int[][] input)
+    public long PartTwo(int[][] map)
     {
+        var start = new Coordinate(0, 0);
+        var goal = new Coordinate(map.Length - 1, map.Length - 1);
+
+        // Multiply the map in X and Y
+
+        // Compute the shortest path
+
         return 0;
     }
 
