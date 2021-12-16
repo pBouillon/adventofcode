@@ -2,11 +2,11 @@
 
 namespace _2021.Day16;
 
-public class PuzzleTest : SolverTest<Solver, string, int>
+public class PuzzleTest : SolverTest<Solver, Packet, int>
 {
     protected override Example PartOne => new()
     {
-        Input = "A0016C880162017C3686B18A3D4780",
+        Input = "A0016C880162017C3686B18A3D4780".AsPacket(),
         Result = 31,
     };
 
