@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using TestCommons;
+using Xunit;
 
 namespace _2021.Day15;
 
@@ -74,7 +75,7 @@ public class PuzzleTest : SolverTest<Solver, int[][], long>
         new[] { 2, 3, 1, 1, 9, 4, 4, 5, 8, 1 },
     };
 
-    private readonly int[] _shortestPath = new[] { 1, 1, 2, 1, 3, 6, 5, 1, 1, 1, 5, 1, 1, 3, 2, 3, 2, 1, 1 };
+    private readonly int[] _shortestPath = { 1, 1, 2, 1, 3, 6, 5, 1, 1, 1, 5, 1, 1, 3, 2, 3, 2, 1, 1 };
 
     protected override Example PartOne => new()
     {
@@ -86,10 +87,13 @@ public class PuzzleTest : SolverTest<Solver, int[][], long>
 
     protected override Example PartTwo => new()
     {
-        Input = _fullMap,
+        Input = _map,
         Result = 315
     };
 
     protected override long PartTwoSolution => 0;
-}
 
+    [Fact]
+    public void ScaleUp()
+        => Assert.Equal(_fullMap, Solver.GetExtendedMap(_map, 5));
+}

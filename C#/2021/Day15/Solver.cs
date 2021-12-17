@@ -22,6 +22,31 @@ public class Solver : ISolver<int[][], long>
 {
     public string InputPath => "Day15/input.txt";
 
+    public static int[][] GetExtendedMap(int[][] map, int magnitude = 5)
+    {
+        // Scale up the map
+        var extendedMap = new int[map.Length * magnitude][];
+
+        for (var x = 0; x < extendedMap.Length; ++x)
+        {
+            extendedMap[x] = new int[map.Length * magnitude];
+        }
+
+        // Populate its values
+        for (var x = 0; x < extendedMap.Length; ++x)
+        {
+            for (var y = 0; y < extendedMap[x].Length; ++y)
+            {
+                var seed = map[x % map.Length][y % map.Length];
+                var distanceFromSeed = x / map.Length + y / map.Length;
+             
+                extendedMap[x][y] = (seed + distanceFromSeed - 1) % 9 + 1;
+            }
+        }
+
+        return extendedMap;
+    }
+
     private static long GetShortestPathCost(int[][] map, Coordinate source, Coordinate target)
     {
         // Initialize the costs map
@@ -70,14 +95,14 @@ public class Solver : ISolver<int[][], long>
 
     public long PartTwo(int[][] map)
     {
-        var start = new Coordinate(0, 0);
-        var goal = new Coordinate(map.Length - 1, map.Length - 1);
-
         // Multiply the map in X and Y
+        var extended= GetExtendedMap(map);
+
+        var start = new Coordinate(0, 0);
+        var goal = new Coordinate(extended.Length - 1, extended.Length - 1);
 
         // Compute the shortest path
-
-        return 0;
+        return GetShortestPathCost(extended, start, goal);
     }
 
     public int[][] ReadInput(string inputPath)
