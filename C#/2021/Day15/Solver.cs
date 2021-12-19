@@ -53,7 +53,8 @@ public class Solver : ISolver<int[][], long>
         var cost = new Dictionary<Coordinate, long>(
             from y in Enumerable.Range(0, map.Length)
             from x in Enumerable.Range(0, map[0].Length)
-            select new KeyValuePair<Coordinate, long>(new Coordinate(x, y), long.MaxValue));
+            select new KeyValuePair<Coordinate, long>(new Coordinate(x, y), long.MaxValue))
+        { [source] = 0 };
 
         // Keep track of the opened nodes, with the less costly ones at the top
         var opened = new PriorityQueue<Coordinate, long>();
