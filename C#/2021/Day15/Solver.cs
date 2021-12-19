@@ -39,7 +39,7 @@ public class Solver : ISolver<int[][], long>
             {
                 var seed = map[x % map.Length][y % map.Length];
                 var distanceFromSeed = x / map.Length + y / map.Length;
-             
+
                 extendedMap[x][y] = (seed + distanceFromSeed - 1) % 9 + 1;
             }
         }
@@ -50,39 +50,38 @@ public class Solver : ISolver<int[][], long>
     private static long GetShortestPathCost(int[][] map, Coordinate source, Coordinate target)
     {
         // Initialize the costs map
-        var cost = new Dictionary<Coordinate, long>();
+        var cost = new Dictionary<Coordinate, long>(
+            from y in Enumerable.Range(0, map.Length)
+            from x in Enumerable.Range(0, map[0].Length)
+            select new KeyValuePair<Coordinate, long>(new Coordinate(x, y), long.MaxValue));
 
-        for (var x = 0; x < map.Length; ++x)
+        // Keep track of the opened nodes, with the less costly ones at the top
+        var opened = new PriorityQueue<Coordinate, long>();
+        opened.Enqueue(source, 0);
+
+        while (opened.Count > 0)
         {
-            for (var y = 0; y < map[x].Length; ++y)
-            {
-                cost[new Coordinate(x, y)] = long.MaxValue;
-            }
-        }
+            // Take the less costly node of the opened ones
+            var current = opened.Dequeue();
 
-        cost[source] = 0;
+            // If the goal is reached, return the total cost
+            if (current == target) return cost[target];
 
-        // Compute the shortest distance between nodes
-        var visited = new HashSet<Coordinate>();
-
-        while (visited.Count != cost.Count)
-        {
-            var current = cost
-                .Where(edge => !visited.Contains(edge.Key))
-                .MinBy(edge => edge.Value)
-                .Key;
-
-            visited.Add(current);
-
+            // Add all the viable neighbors to the opened nodes
             current.GetNeighbors()
                 .Where(neighbor => cost.ContainsKey(neighbor)
                     && cost[neighbor] > cost[current] + map[neighbor.X][neighbor.Y])
                 .ToList()
-                .ForEach(neighbor => cost[neighbor] = cost[current] + map[neighbor.X][neighbor.Y]);
+                .ForEach(neighbor =>
+                {
+                    var costToNeighbor = cost[current] + map[neighbor.X][neighbor.Y];
+
+                    cost[neighbor] = costToNeighbor;
+                    opened.Enqueue(neighbor, costToNeighbor);
+                });
         }
 
-        // Compute the shortest path
-        return cost[target];
+        return -1;
     }
 
     public long PartOne(int[][] map)
